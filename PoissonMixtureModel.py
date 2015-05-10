@@ -59,7 +59,22 @@ for i in range(len(users_1k)):
  		artists[artists_1k[i]] += 1
 
 
-data = np.genfromtxt('/Users/nabeelsarwar/Documents/PrincetonJuniorSpring/COS424/HW/FinalProjectGit/cos424-final/lastfm/train.txt')
+sorted_artists = sorted(artists.items(), key=operator.itemgetter(1), reverse=True)
+
+new_artists = []
+
+for i in range(NUM_ARTISTS):
+    new_artists.append(sorted_artists[i][0])
+
+artists = {}
+artist_count = 0
+
+for i in range(len(new_artists)):
+    if new_artists[i] not in artists:
+        artists[new_artists[i]] = artist_count
+        artist_count += 1
+
+data = np.genfromtxt('/Users/nabeelsarwar/Documents/PrincetonJuniorSpring/COS424/HW/FinalProjectGit2/cos424_final/data.txt')
 
 NUM_VARIABLES = data.shape[1]
 
@@ -78,7 +93,7 @@ print multinomial
 for i in range(K):
     mean = np.zeros(NUM_VARIABLES)
     for j in range(NUM_VARIABLES):
-        mean[j] = np.random.randint(1, high=300)
+        mean[j] = np.random.randint(1, high=10)
     
     clusterMean.append(mean)
 
@@ -113,13 +128,15 @@ def updateConditions():
         rowsumForBayes = scimisc.logsumexp(rowsumForBayes)  
         for j in range(conditionals.shape[1]):
             conditionals[i, j] = np.exp(np.log(multinomial[j]) + np.sum(PoissonProbabilityVector(data[i,:], clusterMean[j])) - rowsumForBayes)
+        if not np.isclose(np.sum(conditionals[i, :]), 1):
+            return 'Probabilities not one'
+            
 
 
 
 def updateMultiNomial():
     for i in range(multinomial.shape[0]):
         multinomial[i] = np.sum(conditionals[:, i])/data.shape[0]
-        print 'Finished Multinomial for {0}:'.format(i)
 
 def updateMeans():
     for i in range(len(clusterMean)):
@@ -130,39 +147,46 @@ def updateMeans():
         if (numerator.shape[0] != clusterMean[i].shape[0]):
             print 'Size mismatch 2 '
         clusterMean[i] = numerator/(multinomial[i] * data.shape[0])
-        print 'Finished means for {0}:'.format(i)
 
 counter = 0
 multinomialDifference = 1
 
-while counter < 10 and multinomialDifference > 0.1:
+while counter < 10:
     oldMulti = multinomial
     updateConditions()
     updateMultiNomial()
     updateMeans()
     multinomialDifference = np.sum(np.abs(multinomial - oldMulti))
+    counter = counter + 1
     print 'Loop {0}'.format(counter)
     
+clusterMean = np.array(clusterMean)
+print clusterMean.shape[0]
+np.savetxt('clusterMean.txt', clusterMean, fmt='%s')
 
 #now we need to output the max conditional for each row
 whichGroupMax = np.zeros(data.shape[0])
 
 #cluster for eachad ta
-whichGroupMax = np.argmax(conditionals, axis = 0)
+whichGroupMax = np.argmax(conditionals, axis = 1)
+print 'Which groups'
 print whichGroupMax
 
 np.savetxt('clustersOfTrainData.txt', whichGroupMax, fmt='%s')
 
+print 'multinomial'
+print multinomial
+np.savetxt('PoissonMixtureClassProbabilities.txt', multinomial, fmt='%s')
 
 #what does each cluster have
 clusterIndices = []
 for i in range(len(clusterMean)):
-    clusterIndices.append(np.argsort(clusterMean[i])[-5:])
+    clusterIndices.append(np.argsort(clusterMean[i, : ])[-5:])
 
 
 def getArtist(index):
     for key in artists:
-        if (artist.get(key) == index):
+        if (artists.get(key) == index):
             return key
 
 
@@ -172,7 +196,7 @@ artistsForEachCluster = []
 for i in range(clusterIndices.shape[0]):
     cluster = []
     for j in range(clusterIndices.shape[1]):
-        cluster.append(getArtist(clusterIndices[i, j]))
+        cluster.append(str(getArtist(clusterIndices[i, j])) + ',')
     cluster = np.array(cluster)
     artistsForEachCluster.append(cluster)
 
@@ -180,6 +204,6 @@ artistsForEachCluster = np.array(artistsForEachCluster)
 
 np.savetxt('artistsFromPoissonMixtureModel.txt', artistsForEachCluster, fmt='%s')
 
-shadowscore = sklearn.metrics.silhouette_score(X, whichGroupMax)
+shadowscore = sklearn.metrics.silhouette_score(data, whichGroupMax)
 
-print 'Silhouette score: {0}:'.format(shadowscore)
+print 'Silhouette score: {0}'.format(shadowscore)
