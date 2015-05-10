@@ -93,6 +93,8 @@ print 'Created Conditionals'
 def PoissonProbability(value, mean):
     if value==0:
         return np.exp(-mean)
+    if mean==0:
+        return -gammaln(value)
     return value * np.log(mean) - mean - gammaln(value)
 
 def PoissonProbabilityVector(vector, mean):
