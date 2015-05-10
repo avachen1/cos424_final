@@ -1,0 +1,95 @@
+ \documentclass{article} % For LaTeX2e
+\usepackage{cos424,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{parskip}
+\usepackage{placeins}
+
+\bibliographystyle{plos2009}
+
+
+\title{Clustering Last.fm Users}
+
+
+\author{
+Ava Chen\\
+Department of Computer Science\\
+\texttt{avac@princeton.edu}\\
+\And
+James Bartusek\\
+Department of Computer Science\\
+\texttt{bartusek@princeton.edu} \\
+\And
+Nabeel Sarwar\\
+Department of Astrophysical Sciences\\
+\texttt{nsarwar@princeton.edu} \\
+}
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\end{abstract}
+
+
+\section{Introduction}
+
+Last.fm (\cite{lastfm}) is a music website that collects music preference information for its users. Users will have preferrered artists, how many times they listen to them, and what events they attend. Using this information, Last.fm generates music recommendations for each user. Last.fm is also tied in with different people's social media networks, so for each user, a large number of features are collected. For each user, we can collect the number of times that they listen to each artist. In this project, we use data collected from the Fall of 2008 and cleaned in 2009 to analyze how users cluster into various artists.  
+
+This data is naturally sparse as most users do not listen to many artists. There are, however, many 
+
+\section{Data processing}
+
+We limited the number of artists based on the number of unique users that listened to an artist. The 1000 artists with the highest number of unique users are used as the features for each user. The goal of this was to remove artists that are popular among only among very few number of users. 
+
+The data is from \cite{data}. The number of users is that have listened to these artists are 9809. 
+
+
+\section{Clustering Methods}
+
+
+We cluster the data using two EM algorithms and using a soft EM K-means algorithm. To cluster the users, the number of times each users has listened to each artist is used as the features. 
+\begin{itemize}
+    \item K-means with 20 components
+    \item Gaussian Mixture Model with 10 components
+    \item Poisson Mixture 10 components
+\end{itemize}
+
+K-means was used a naive model that could be compared to the Gaussian Mixture and Poisson Mixture models. For each clustering method, we calculate the silhouette score. 
+
+Both the K-means algorithm and the Gaussian Mixture Model for clustering were implemented in \cite{scikit-learn}. 
+
+The Poisson Mixture is used as the data is count data. It is not unreasonble that the counts that an artist is listened to by a user is Poisson distributed. The Poisson mixture model was coded in house. So with this assumption, listening to an artist is viewed as a Poisson process. 
+
+\section{Imputation Methods}
+To imputate the 
+
+\section{Results}
+
+\subsection{Clusters}
+For
+
+
+\subsection{Imputation}
+
+
+\begin{itemize}
+    \item 
+\end{itemize}
+
+
+\section{Conclusion and Extensions}
+
+
+\bibliography{ref}
+
+\end{document}
+
+

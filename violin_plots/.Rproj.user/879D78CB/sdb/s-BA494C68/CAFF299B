@@ -1,0 +1,16 @@
+{
+    "contents" : "library(data.table)\ntrips = read.table(\"~/cos424/btc/txTripletsCounts.txt\", nrows = 3348026)\nDT.trips = data.table(trips[seq(1, length(trips), 3)], trips[seq(2,length(trips))])\nsetnames(DT.trips, c(\"giver\", \"receiver\", \"count\"))\nsetkey(DT.trips, \"giver\", \"receiver\")\nDT.binary = DT.trips[,1, by=c(\"giver\", \"receiver\")]\nsetnames(DT.binary, c(\"giver\", \"receiver\", \"indicator\"))\nsetkey(DT.binary, \"giver\", \"receiver\")\n\nUNIQUE = sort(unique(c(DT.binary[,giver], DT.binary[,receiver])))\nNUM.ADDR = length(UNIQUE)\nlibrary(Matrix)\nMAT.bin = spMatrix(NUM.ADDR, NUM.ADDR, \n                   i= DT.binary[,giver] + 1,\n                   j= DT.binary[,receiver] + 1,\n                   x = DT.binary[,indicator])\n\nMAT.trips = spMatrix(NUM.ADDR, NUM.ADDR, \n                   i= DT.trips[,giver]+1,\n                   j= DT.trips[,receiver]+1,\n                   x = DT.trips[,count])\n\ntest.data = read.table(\"~/cos424/btc/testTriplets.txt\")\ntest.data[,1] = test.data[,1] + 1\ntest.data[,2] = test.data[,2] + 1\ntest.data = data.table(test.data)\nsetnames(test.data, c(\"giver\", \"receiver\", \"bool\"))\n\nlibrary(ggplot2)\nprob = read.table(\"~/cos424/btc/svdProbs.txt\", nrows = NUM.ADDR)\ndat = data.frame(prob, as.factor(test.data[,bool]))\ncolnames(dat) = c(\"prob\", \"value\")\nggplot(dat, aes(value, prob)) + \n  geom_violin() + \n  geom_jitter(alpha=.1) + \n  scale_y_log10() + \n  ggtitle(\"\") + \n  labs(x=\"test value\", y=\"prob\")\n\n",
+    "created" : 1431229997771.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "867239884",
+    "id" : "CAFF299B",
+    "lastKnownWriteTime" : 1430168070,
+    "path" : "~/Documents/AvaChen/princeton/spring2015/cos424/assignment3/heleny_avac_hw3/btc.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
