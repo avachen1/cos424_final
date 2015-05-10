@@ -111,8 +111,6 @@ def updateConditions():
         rowsumForBayes = scimisc.logsumexp(rowsumForBayes)  
         for j in range(conditionals.shape[1]):
             conditionals[i, j] = np.exp(np.log(multinomial[j]) + np.sum(PoissonProbabilityVector(data[i,:], clusterMean[j])) - rowsumForBayes)
-        if (i % 10 == 0):
-            print 'Finished Conditions for {0}:'.format(i)
 
 
 
@@ -134,19 +132,21 @@ def updateMeans():
 
 counter = 0
 multinomialDifference = 1
+
 while counter < 10 and multinomialDifference > 0.1:
     oldMulti = multinomial
     updateConditions()
     updateMultiNomial()
     updateMeans()
     multinomialDifference = np.sum(np.abs(multinomial - oldMulti))
+    print 'Loop {0}'.format(counter)
     
 
 #now we need to output the max conditional for each row
 whichGroupMax = np.zeros(data.shape[0])
 
 #cluster for eachad ta
-whichGroupMax = np.argmax(conditional, axis = 0)
+whichGroupMax = np.argmax(conditionals, axis = 0)
 print whichGroupMax
 
 np.savetxt('clustersOfTrainData.txt', whichGroupMax, fmt='%s')
