@@ -1,0 +1,23 @@
+raw data loaded
+created 1k data
+user_count: 10000
+[ 0.1  0.1  0.1  0.1  0.1  0.1  0.1  0.1  0.1  0.1]
+Created Means
+Created Conditionals
+Loop 1
+Loop 2
+Loop 3
+Loop 4
+Loop 5
+Loop 6
+Loop 7
+Loop 8
+Loop 9
+Loop 10
+10
+Which groups
+[8 2 4 ..., 3 2 4]
+multinomial
+[ 0.10582178  0.12837147  0.25286213  0.06023415  0.04210309  0.05401751
+  0.03517867  0.03507105  0.12436383  0.16197631]
+Silhouette score: -0.407483508419

@@ -49,7 +49,7 @@ This data is naturally sparse as most users do not listen to many artists. There
 
 We limited the number of artists based on the number of unique users that listened to an artist. The 1000 artists with the highest number of unique users are used as the features for each user. The goal of this was to remove artists that are popular among only among very few number of users. 
 
-The data is from \cite{data}. The number of users is that have listened to these artists are 9809. 
+The data is from \cite{data}. The number of users is that have listened to these artists is 9809. 
 
 
 \section{Clustering Methods}
@@ -68,7 +68,7 @@ K-means was used a naive model that could be compared to the Gaussian Mixture an
 
 Both the K-means algorithm and the Gaussian Mixture Model for clustering were implemented in \cite{scikit-learn}. 
 
-The Poisson Mixture is used as the data is count data. It is not unreasonble that the counts that an artist is listened to by a user is Poisson distributed. The Poisson mixture model used calculated cluster groups using an EM algorithm. So with this assumption, listening to an artist is viewed as a Poisson process. 
+The Poisson Mixture is used as the data is count data. It is not unreasonble that the counts that an artist is listened to by a user is Poisson distributed. The Poisson mixture model that calculated cluster groups uses an EM algorithm where the counts for different artists are independent for a given user. So with this assumption, listening to an artist is viewed as a Poisson process. 
 
 \section{Imputation Methods}
 To imputate the 
@@ -78,7 +78,11 @@ To imputate the
     \item GMM Imputation
     \item Singular Value Decomposition
     \item Non-negative matrix factorization using nonnegative double singular value decompositions
+    \item Poisson-Gamma Matrix Factorization
 \end{itemize}
+
+
+K-means imputation is an algorithm where we first convert frequency counts that users listened to an artist to binary interaction values. Using this, we then imputed missing values for a given user by the value for the artist in the cluster centroid. This value can be thresholded to produce binary data again. 
 \section{Results}
 
 
@@ -87,7 +91,7 @@ To imputate the
 For
 
 \subsection{Imputation}
-Using matrix various matrix factorization methods, we imputated the interaction rate between a user and an artist. Here we will report the violin plots and the area under curve for the precision-recall curve. 
+Using matrix various matrix factorization methods, we imputated the interaction rate between a user and an artist. Counts were converted to bianry. Here we will report the violin plots and the area under curve for the precision-recall curve. 
 
 \begin{itemize}
     \item 
