@@ -1,3 +1,5 @@
+PRC AND OTHER SCORES (FINAL)
+
 nmf20_binary_imputation
 precision recall AUC 0.81463407016
 adjusted rand score 0.00980940690659
@@ -5,6 +7,152 @@ adjusted mutual info score 0.0142742846268
 homogeneity score 0.0142873505869
 completeness score 0.145372538312
 v-measure score 0.0260176608526
+
+svd20_binary_imputation
+[ 0.01737466  0.02170392  0.01672709  0.01338698  0.01204681  0.00973797
+  0.00867744  0.00786386  0.00763535  0.00714915  0.00631209  0.00601671
+  0.00592405  0.00574603  0.00545252  0.00508447  0.00493001  0.00454702
+  0.00452376  0.00442061]
+total explained variance 0.17526049222
+precision recall AUC 0.826462193301
+adjusted rand score 0.0100220384444
+adjusted mutual info score 0.0144391123246
+homogeneity score 0.0144521758811
+completeness score 0.144124256442
+v-measure score 0.0262700966634
+
+kmeans20_binary_imputation
+precision recall AUC 0.770804337866
+adjusted rand score 0.0057961107007
+adjusted mutual info score 0.00807275857249
+homogeneity score 0.008085912834
+completeness score 0.121105806909
+v-measure score 0.0151596557474
+
+gmm20_binary_imputation
+precision recall AUC 0.787826620218
+adjusted rand score 0.000713531539782
+adjusted mutual info score 0.00100169218442
+homogeneity score 0.0010150545134
+completeness score 0.08825850149
+v-measure score 0.00200702636466
+
+
+ROC SCORES (FINAL)
+
+nmf20_binary_imputation
+receiver operating characteristic AUC 0.859676568548
+
+svd20_binary_imputation
+[ 0.01737466  0.02170391  0.01672709  0.01338697  0.0120469   0.00973809
+  0.00867814  0.00786512  0.00763577  0.00715337  0.00631473  0.00602076
+  0.00592293  0.00575345  0.00545197  0.00509605  0.00490856  0.00457492
+  0.00450765  0.0043441 ]
+total explained variance 0.175205153233
+receiver operating characteristic AUC 0.862091428598
+
+kmeans20_binary_imputation
+receiver operating characteristic AUC 0.816667355277
+
+gmm20_binary_imputation
+receiver operating characteristic AUC 0.841708504794
+
+
+
+
+
+
+
+KMEANS AND GMM USING MLE ESTIMATE (AGAIN)
+
+nmf20_binary_imputation
+precision recall AUC 0.81463407016
+adjusted rand score 0.00980940690659
+adjusted mutual info score 0.0142742846268
+homogeneity score 0.0142873505869
+completeness score 0.145372538312
+v-measure score 0.0260176608526
+
+svd20_binary_imputation
+[ 0.01737466  0.02170392  0.01672709  0.01338697  0.01204666  0.00973825
+  0.00867792  0.00786542  0.00763567  0.00715406  0.00631599  0.00601692
+  0.00592672  0.00575037  0.00547419  0.00511324  0.00492221  0.00455677
+  0.00454451  0.00438282]
+total explained variance 0.175314347304
+precision recall AUC 0.828019802682
+adjusted rand score 0.0104335966871
+adjusted mutual info score 0.0150450558084
+homogeneity score 0.0150581110183
+completeness score 0.145763652946
+v-measure score 0.0272963710184
+
+kmeans20_binary_imputation
+precision recall AUC 0.777244325218
+adjusted rand score 0.00799486316291
+adjusted mutual info score 0.0116436881035
+homogeneity score 0.0116567910381
+completeness score 0.138610185226
+v-measure score 0.0215050572667
+
+gmm20_binary_imputation
+precision recall AUC 0.783230270382
+adjusted rand score 0.000483092920029
+adjusted mutual info score 0.00069647859352
+homogeneity score 0.000709913302718
+completeness score 0.0880787203884
+v-measure score 0.00140847432133
+
+
+KMEANS AND GMM USING MLE ESTIMATE
+
+nmf20_binary_imputation
+precision recall AUC 0.81463407016
+adjusted rand score 0.00980940690659
+adjusted mutual info score 0.0142742846268
+homogeneity score 0.0142873505869
+completeness score 0.145372538312
+v-measure score 0.0260176608526
+
+svd20_binary_imputation
+[ 0.01737466  0.02170392  0.01672709  0.01338697  0.01204676  0.00973777
+  0.00867765  0.00786416  0.00763595  0.00715431  0.00631108  0.00599255
+  0.00592138  0.00575283  0.00547016  0.0051055   0.00491553  0.00454856
+  0.00449778  0.00439936]
+total explained variance 0.175223954567
+precision recall AUC 0.824450129808
+adjusted rand score 0.0102080167835
+adjusted mutual info score 0.0147875043854
+homogeneity score 0.0148005631527
+completeness score 0.14589892311
+v-measure score 0.0268748366982
+
+kmeans20_binary_imputation
+precision recall AUC 0.774057384031
+adjusted rand score 0.00667502760137
+adjusted mutual info score 0.0091573876392
+homogeneity score 0.00917052537586
+completeness score 0.122079309655
+v-measure score 0.0170595476451
+
+gmm20_binary_imputation
+precision recall AUC 0.784508951287
+adjusted rand score 2.81045478762e-05
+adjusted mutual info score 2.85841545044e-05
+homogeneity score 4.67313681181e-05
+completeness score 0.0774656956629
+v-measure score 9.34063886065e-05
+
+
+KMEANS AND GMM USING CLUSTER CENTERS
+
+nmf20_binary_imputation
+precision recall AUC 0.81463407016
+adjusted rand score 0.00980940690659
+adjusted mutual info score 0.0142742846268
+homogeneity score 0.0142873505869
+completeness score 0.145372538312
+v-measure score 0.0260176608526
+
 svd20_binary_imputation
 [ 0.01737466  0.02170391  0.01672709  0.01338697  0.01204669  0.00973811
   0.00867756  0.00786254  0.00763545  0.00715488  0.00631254  0.00601619
@@ -17,6 +165,7 @@ adjusted mutual info score 0.0141592551179
 homogeneity score 0.0141723227715
 completeness score 0.145952788867
 v-measure score 0.0258359230736
+
 kmeans20_binary_imputation
 precision recall AUC 0.77757100693
 adjusted rand score 0.00790941325364
@@ -24,6 +173,7 @@ adjusted mutual info score 0.0111092816772
 homogeneity score 0.0111223915762
 completeness score 0.131297421758
 v-measure score 0.0205075586542
+
 gmm20_binary_imputation
 precision recall AUC 0.784508595055
 adjusted rand score 0.000196952032523
@@ -37,49 +187,3 @@ v-measure score 0.000652077748228
 
 
 
-
-nmf20_binary_imputation
-precision recall AUC 0.81463407016
-adjusted rand score 0.00980940690659
-adjusted mutual info score 0.0142742846268
-homogeneity score 0.0142873505869
-completeness score 0.145372538312
-v-measure score 0.0260176608526
-kmeans20_binary_imputation
-precision recall AUC 0.775226993148
-adjusted rand score 0.00724795257957
-adjusted mutual info score 0.0101259357363
-homogeneity score 0.0101390597002
-completeness score 0.127707847031
-v-measure score 0.0187866019767
-gmm20_binary_imputation
-precision recall AUC 0.784671573512
-adjusted rand score 0.000468955660484
-adjusted mutual info score 0.000673852772676
-homogeneity score 0.000687293740932
-completeness score 0.0874127903135
-v-measure score 0.00136386393508
-
-nmf20_binary_split
-precision recall AUC 0.0355406174775
-adjusted rand score 0.0191570938791
-/anaconda/lib/python2.7/site-packages/sklearn/metrics/cluster/supervised.py:652: RuntimeWarning: invalid value encountered in log
-  emi = expected_mutual_information(contingency, n_samples)
-adjusted mutual info score nan
-homogeneity score 0.00233905129936
-completeness score 0.0125574239442
-v-measure score 0.00394354480682
-kmeans20_binary_split
-precision recall AUC 0.0398015428862
-adjusted rand score 0.0110611126271
-adjusted mutual info score 1.01583373829
-homogeneity score 0.00136486069027
-completeness score 0.0137053518306
-v-measure score 0.00248249929243
-gmm20_binary_split
-precision recall AUC 0.0407008729694
-adjusted rand score 0.002596560855
-adjusted mutual info score 1.01625660099
-homogeneity score 0.000359645085962
-completeness score 0.0173200736203
-v-measure score 0.000704658198416
