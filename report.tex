@@ -49,13 +49,15 @@ This data is naturally sparse as most users do not listen to many artists. There
 
 We limited the number of artists based on the number of unique users that listened to an artist. The 1000 artists with the highest number of unique users are used as the features for each user. The goal of this was to remove artists that are popular among only among very few number of users. 
 
-The data is from \cite{data}. The number of users is that have listened to these artists are 9809. 
+The data is from \cite{data}. The number of users is that have listened to these artists is 9809. 
 
 
 \section{Clustering Methods}
 
 
 We cluster the data using two EM algorithms and using a soft EM K-means algorithm. To cluster the users, the number of times each users has listened to each artist is used as the features. 
+
+
 \begin{itemize}
     \item K-means with 20 components
     \item Gaussian Mixture Model with 10 components
@@ -66,24 +68,64 @@ K-means was used a naive model that could be compared to the Gaussian Mixture an
 
 Both the K-means algorithm and the Gaussian Mixture Model for clustering were implemented in \cite{scikit-learn}. 
 
-The Poisson Mixture is used as the data is count data. It is not unreasonble that the counts that an artist is listened to by a user is Poisson distributed. The Poisson mixture model was coded in house. So with this assumption, listening to an artist is viewed as a Poisson process. 
+The Poisson Mixture is used as the data is count data. It is not unreasonble that the counts that an artist is listened to by a user is Poisson distributed. The Poisson mixture model that calculated cluster groups uses an EM algorithm where the counts for different artists are independent for a given user. So with this assumption, listening to an artist is viewed as a Poisson process. 
 
 \section{Imputation Methods}
 To imputate the 
 
+\begin{itemize}
+    \item K-means imputation
+    \item GMM Imputation
+    \item Singular Value Decomposition
+    \item Non-negative matrix factorization using nonnegative double singular value decompositions
+    \item Poisson-Gamma Matrix Factorization
+\end{itemize}
+
+
+K-means imputation is an algorithm where we first convert frequency counts that users listened to an artist to binary interaction values. Using this, we then imputed missing values for a given user by the value for the artist in the cluster centroid. This value can be thresholded to produce binary data again. 
 \section{Results}
+
+
 
 \subsection{Clusters}
 For
 
-
 \subsection{Imputation}
-
+Using matrix various matrix factorization methods, we imputated the interaction rate between a user and an artist. Counts were converted to bianry. Here we will report the violin plots and the area under curve for the precision-recall curve. 
 
 \begin{itemize}
     \item 
 \end{itemize}
 
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{NMFdecompositionROC.png}
+\caption{\textbf{Violin Plots of .}  }
+\label{fig:ROCNMF}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{methods_pr-binary-imputation.png}
+    \caption{\textbf{Precision and Recall} for the different imputation methods. NMF had the best peformance}
+    \label{fig:precisionrecall}
+\end{figure}
+
+\begin{table}[htbp]
+\small
+   \centering
+   \begin{tabular}{@{}|c|c|c|@{}} % Column formatting, @{} suppresses leading/trailing space 
+   \hline
+  Method & & Prec & Recall & $F_1$ & r-value  \\ \hline \hline
+  SVD Imputation & 0.8996 & 0.4954 & 0.22 & 0.3047 & 0.2835 \\
+  NMF Imputation & 0.9045 & 0.5413 & 0.2950 & 0.3819 & 0.3532\\
+  NMF Imputation (sparse) & 0.9050 & 0.5462 & 0.2950 & 0.3819 & 0.3554 \\
+  LDA Imputation (20 topics) & 0.845 & 0.223 & 0.222 & 0.2226 & 0.13658 \\
+  LDA Imputation (15 topics) & 0.8286 & 0.2139 & 0.267 & 0.2375 & 0.1434 \\ \hline
+   \end{tabular}
+   \caption{{\bf Results of 4 different methods of matrix factorization.} } 
+   \label{tab:methods}
+\end{table}
 
 \section{Conclusion and Extensions}
 
